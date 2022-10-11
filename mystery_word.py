@@ -1,4 +1,25 @@
-import random   
+import random          
+
+def choose_difficulty(words_in_txt):
+    words = words_in_txt.split()
+    easy = [word for word in words if len(word) < 5]
+    hard = [word for word in words if len(word) > 7]
+    print("\nChoose a difficulty.")
+    print("1 for an easy word, 2 for any word, or 3 for a hard word.")
+    difficulty = input(" Enter 1 / 2 / 3: ")
+    if difficulty == "1":
+        word_to_guess = random.choice(easy)
+        return word_to_guess
+    elif difficulty == "2":
+        word_to_guess = random.choice(words)
+        return word_to_guess
+    elif difficulty == "3":
+        word_to_guess = random.choice(hard)
+        return word_to_guess
+    else:
+        print("\nPlease enter 1 or 2 or 3.")
+        difficulty = input(" Enter 1 / 2 / 3: ")
+        return difficulty
 
 def create_board(word):
     board_list = []
@@ -18,31 +39,30 @@ def show_board(word, board, correct_list):
 
 
 def get_user_guess():
-    guess = input("\nGuess your letter: ")
+    guess = input("\n Guess your letter: ")
     if len(guess) > 1:
         print("\nPlease guess only one letter.")
-        guess = input("\nGuess your letter: ")
+        guess = input("\n Guess your letter: ")
         return guess
     else:
         return guess
 
 
 def play_again():
-    answer = input("\nPlay again? y / n : ")
+    answer = input("\n Play again? y / n : ")
     if answer == "y":
         play_game()
     elif answer == "n":
         exit()
     else:
-        print("\nPlease choose y or n.")
+        print("\n Please choose y or n.")
         play_again()
 
 
 def play_game():
     with open("words.txt") as file:
         words_in_txt = file.read()
-        words = words_in_txt.split()
-    word_to_guess = random.choice(words)
+    word_to_guess = choose_difficulty(words_in_txt)
     game_board = create_board(word_to_guess)
     correct_guesses = []
     incorrect_guesses = []
