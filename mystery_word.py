@@ -3,15 +3,16 @@ import random
 def choose_difficulty(words_in_txt):
     words = words_in_txt.split()
     easy = [word for word in words if len(word) < 5]
-    hard = [word for word in words if len(word) > 7]
+    medium = [word for word in words if len(word) > 4 and len(word) < 10]
+    hard = [word for word in words if len(word) > 9]
     print("\nChoose a difficulty.")
-    print("1 for an easy word, 2 for any word, or 3 for a hard word.")
+    print("1 for an easy word, 2 for a medium word, or 3 for a hard word.")
     difficulty = input(" Enter 1 / 2 / 3: ")
     if difficulty == "1":
         word_to_guess = random.choice(easy)
         return word_to_guess
     elif difficulty == "2":
-        word_to_guess = random.choice(words)
+        word_to_guess = random.choice(medium)
         return word_to_guess
     elif difficulty == "3":
         word_to_guess = random.choice(hard)
